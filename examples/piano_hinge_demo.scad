@@ -6,5 +6,5 @@ piano_hinge(
     leaf_thickness= 2,
     knuckle_od    = 5,
     knuckle_pitch = 8,
-    print_pin     = true
+    integral_pin  = true
 );

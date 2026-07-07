@@ -7,5 +7,5 @@ knuckle_hinge(
     knuckle_od     = 6,
     knuckle_count  = 5,
     pin_clearance  = 0.25,
-    print_pin      = true
+    integral_pin   = true
 );
