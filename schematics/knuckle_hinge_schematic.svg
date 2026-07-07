@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 420" font-family="Menlo, monospace" font-size="13">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="620" height="420" fill="#ffffff"/>
+  <text x="20" y="24" font-size="16" font-weight="bold" fill="#1a1a1a">knuckle_hinge — top view</text>
+
+  <!-- leaves -->
+  <rect x="60" y="60" width="110" height="140" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <rect x="230" y="60" width="110" height="140" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+
+  <!-- knuckles -->
+  <g fill="#e8b923" stroke="#2c3e50" stroke-width="2">
+    <circle cx="200" cy="76"  r="16"/>
+    <circle cx="200" cy="104" r="16"/>
+    <circle cx="200" cy="132" r="16"/>
+    <circle cx="200" cy="160" r="16"/>
+    <circle cx="200" cy="188" r="16"/>
+  </g>
+  <!-- bore + pin clearance callout on top knuckle -->
+  <circle cx="200" cy="76" r="9" fill="none" stroke="#1a5276" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="200" cy="76" r="6.5" fill="#ffffff" stroke="#c0392b" stroke-width="1.5"/>
+
+  <!-- pin, sticking out past the leaves -->
+  <line x1="200" y1="60" x2="200" y2="230" stroke="#7f8c8d" stroke-width="6" stroke-linecap="round"/>
+  <line x1="200" y1="220" x2="420" y2="222" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="424" y="228" fill="#1a1a1a">pin (print_pin)</text>
+
+  <!-- pin_clearance callout leader -->
+  <line x1="209" y1="76" x2="260" y2="34" stroke="#c0392b" stroke-width="1"/>
+  <text x="262" y="26" fill="#c0392b">pin_clearance</text>
+  <text x="262" y="42" fill="#c0392b">(bore Ø − pin Ø, radial)</text>
+
+  <!-- leaf_width dimension -->
+  <line x1="60" y1="250" x2="170" y2="250" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="60" y1="242" x2="60" y2="258" stroke="#c0392b" stroke-width="1"/>
+  <line x1="170" y1="242" x2="170" y2="258" stroke="#c0392b" stroke-width="1"/>
+  <text x="72" y="270" fill="#1a5276">leaf_width</text>
+
+  <!-- leaf_length dimension -->
+  <line x1="35" y1="60" x2="35" y2="200" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="8" y="135" fill="#1a5276" transform="rotate(-90 8 135)">leaf_length</text>
+
+  <!-- knuckle_od dimension -->
+  <line x1="184" y1="132" x2="216" y2="132" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="184" y="118" fill="#1a5276">knuckle_od</text>
+
+  <!-- knuckle_count bracket -->
+  <path d="M355,60 L365,60 L365,200 L355,200" fill="none" stroke="#1a5276" stroke-width="1.5"/>
+  <text x="370" y="134" fill="#1a5276">knuckle_count = 5</text>
+
+  <!-- side view -->
+  <text x="20" y="320" font-size="16" font-weight="bold" fill="#1a1a1a">side view</text>
+  <rect x="60" y="340" width="240" height="16" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <circle cx="200" cy="348" r="16" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="330" y1="332" x2="330" y2="364" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="336" y="352" fill="#1a5276">leaf_thickness</text>
+
+  <text x="20" y="400" fill="#555555">fn → circle resolution (knuckles + pin)</text>
+</svg>

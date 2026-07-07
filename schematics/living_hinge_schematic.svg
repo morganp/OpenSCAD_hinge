@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" font-family="Menlo, monospace" font-size="13">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="620" height="340" fill="#ffffff"/>
+  <text x="20" y="24" font-size="16" font-weight="bold" fill="#1a1a1a">living_hinge — side (cross-section) view</text>
+
+  <!-- parent slab either side -->
+  <rect x="60" y="120" width="120" height="40" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <rect x="300" y="120" width="120" height="40" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <!-- hinge block -->
+  <rect x="180" y="120" width="120" height="40" fill="#fef6e4" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4,3"/>
+
+  <!-- grooves (3) cut from top and bottom leaving a thin web -->
+  <g fill="#ffffff" stroke="#2c3e50" stroke-width="1.5">
+    <rect x="205" y="120" width="6" height="14"/>
+    <rect x="205" y="146" width="6" height="14"/>
+    <rect x="237" y="120" width="6" height="14"/>
+    <rect x="237" y="146" width="6" height="14"/>
+    <rect x="269" y="120" width="6" height="14"/>
+    <rect x="269" y="146" width="6" height="14"/>
+  </g>
+
+  <!-- length dim -->
+  <line x1="180" y1="180" x2="300" y2="180" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="205" y="198" fill="#1a5276">length (fold direction)</text>
+
+  <!-- width dim (into page, shown as depth arrow) -->
+  <line x1="450" y1="120" x2="450" y2="160" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="456" y="144" fill="#1a5276">width (along hinge axis)</text>
+
+  <!-- thickness -->
+  <line x1="40" y1="120" x2="40" y2="160" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="6" y="145" fill="#1a5276">thickness</text>
+
+  <!-- web_thickness callout -->
+  <line x1="211" y1="134" x2="211" y2="146" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="211" y1="140" x2="220" y2="70" stroke="#c0392b" stroke-width="1"/>
+  <text x="220" y="60" fill="#1a5276">web_thickness (flex web left</text>
+  <text x="220" y="76" fill="#1a5276">between grooves, top + bottom)</text>
+
+  <!-- groove_width -->
+  <line x1="205" y1="230" x2="211" y2="230" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="216" y="234" fill="#1a5276">groove_width</text>
+  <line x1="208" y1="160" x2="208" y2="228" stroke="#c0392b" stroke-width="1" stroke-dasharray="2,2"/>
+
+  <!-- groove_count -->
+  <path d="M195,255 L195,265 L285,265 L285,255" fill="none" stroke="#1a5276" stroke-width="1.5"/>
+  <text x="205" y="282" fill="#1a5276">groove_count = 3 (relief cuts, evenly spaced)</text>
+
+  <text x="20" y="316" fill="#555555">flexes by bending the thin web_thickness webs;</text>
+  <text x="20" y="332" fill="#555555">groove_count / groove_width tune stiffness vs. fold radius</text>
+</svg>

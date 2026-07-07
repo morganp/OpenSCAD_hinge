@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" font-family="Menlo, monospace" font-size="13">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="620" height="440" fill="#ffffff"/>
+  <text x="20" y="24" font-size="16" font-weight="bold" fill="#1a1a1a">door_butt_hinge — top view</text>
+
+  <rect x="70" y="60" width="130" height="220" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <rect x="260" y="60" width="130" height="220" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+
+  <g fill="#e8b923" stroke="#2c3e50" stroke-width="2">
+    <circle cx="230" cy="80"  r="15"/>
+    <circle cx="230" cy="126" r="15"/>
+    <circle cx="230" cy="172" r="15"/>
+    <circle cx="230" cy="218" r="15"/>
+    <circle cx="230" cy="264" r="15"/>
+  </g>
+  <line x1="230" y1="60" x2="230" y2="300" stroke="#7f8c8d" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- screw holes, screws_per_leaf = 4, with countersink shown as double circle -->
+  <g stroke="#2c3e50" stroke-width="1.5">
+    <circle cx="140" cy="100" r="9" fill="#7f8c8d"/>
+    <circle cx="140" cy="100" r="13" fill="none" stroke-dasharray="2,2"/>
+    <circle cx="140" cy="150" r="9" fill="#7f8c8d"/>
+    <circle cx="140" cy="150" r="13" fill="none" stroke-dasharray="2,2"/>
+    <circle cx="140" cy="200" r="9" fill="#7f8c8d"/>
+    <circle cx="140" cy="200" r="13" fill="none" stroke-dasharray="2,2"/>
+    <circle cx="140" cy="250" r="9" fill="#7f8c8d"/>
+    <circle cx="140" cy="250" r="13" fill="none" stroke-dasharray="2,2"/>
+  </g>
+
+  <!-- knuckle_od -->
+  <line x1="215" y1="80" x2="245" y2="80" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="245" y1="80" x2="420" y2="80" stroke="#c0392b" stroke-width="1"/>
+  <text x="424" y="84" fill="#1a5276">knuckle_od</text>
+
+  <!-- screw_hole_d / screw_csk_d callout -->
+  <line x1="153" y1="150" x2="420" y2="150" stroke="#c0392b" stroke-width="1"/>
+  <text x="424" y="146" fill="#1a5276">screw_hole_d (through bore)</text>
+  <text x="424" y="164" fill="#1a5276">screw_csk_d (countersink, dashed)</text>
+
+  <!-- knuckle_count bracket -->
+  <path d="M550,60 L560,60 L560,280 L550,280" fill="none" stroke="#1a5276" stroke-width="1.5"/>
+  <text x="565" y="220" fill="#1a5276">knuckle_count</text>
+  <text x="565" y="236" fill="#1a5276">= 5</text>
+
+  <!-- leaf_length -->
+  <line x1="40" y1="60" x2="40" y2="280" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="12" y="175" fill="#1a5276" transform="rotate(-90 12 175)">leaf_length</text>
+
+  <!-- leaf_width -->
+  <line x1="70" y1="300" x2="200" y2="300" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="85" y="316" fill="#1a5276">leaf_width</text>
+
+  <!-- screws_per_leaf bracket -->
+  <path d="M120,90 L110,90 L110,260 L120,260" fill="none" stroke="#1a5276" stroke-width="1.5"/>
+  <text x="20" y="340" fill="#1a5276">screws_per_leaf = 4 (evenly spaced down each leaf centerline)</text>
+
+  <text x="20" y="380" fill="#555555">leaf_thickness — plate thickness (Z)</text>
+  <text x="20" y="398" fill="#555555">screw_csk_depth — countersink funnel depth (Z)</text>
+  <text x="20" y="416" fill="#555555">pin_clearance, fn — bore-to-pin fit / circle resolution</text>
+</svg>
