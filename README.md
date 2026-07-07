@@ -33,6 +33,8 @@ bored-both-sides hinge with an optional separately printed pin.
 ![knuckle_hinge render](renders/knuckle_hinge.png)
 ![knuckle_hinge schematic](schematics/knuckle_hinge_schematic.png)
 
+**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/knuckle_hinge_demo.scad)** — view this demo in the browser, no install.
+
 | Parameter | Default | Meaning |
 |---|---|---|
 | `leaf_length` | 40 | Hinge length along the axis (Y) |
@@ -56,6 +58,8 @@ target `knuckle_pitch`, for long lids needing even load distribution.
 
 ![piano_hinge render](renders/piano_hinge.png)
 ![piano_hinge schematic](schematics/piano_hinge_schematic.png)
+
+**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/piano_hinge_demo.scad)** — view this demo in the browser, no install.
 
 | Parameter | Default | Meaning |
 |---|---|---|
@@ -82,6 +86,8 @@ assembly.
 ![living_hinge render](renders/living_hinge.png)
 ![living_hinge schematic](schematics/living_hinge_schematic.png)
 
+**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/living_hinge_demo.scad)** — view this demo in the browser, no install.
+
 | Parameter | Default | Meaning |
 |---|---|---|
 | `width` | 40 | Extent along the hinge axis (Y) |
@@ -102,6 +108,8 @@ in a rigid filament.
 
 ![door_butt_hinge render](renders/door_butt_hinge.png)
 ![door_butt_hinge schematic](schematics/door_butt_hinge_schematic.png)
+
+**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/door_butt_hinge_demo.scad)** — view this demo in the browser, no install.
 
 | Parameter | Default | Meaning |
 |---|---|---|
@@ -130,6 +138,8 @@ any assembly step.
 
 ![snap_lid_hinge render](renders/snap_lid_hinge.png)
 ![snap_lid_hinge schematic](schematics/snap_lid_hinge_schematic.png)
+
+**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/snap_lid_hinge_demo.scad)** — view this demo in the browser, no install.
 
 | Parameter | Default | Meaning |
 |---|---|---|
