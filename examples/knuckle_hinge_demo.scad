@@ -1,3 +1,4 @@
+// @github: morganp/OpenSCAD_hinge
 include <../hinge_library.scad>
 
 knuckle_hinge(

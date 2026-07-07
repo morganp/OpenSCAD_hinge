@@ -1,3 +1,4 @@
+// @github: morganp/OpenSCAD_hinge
 include <../hinge_library.scad>
 
 door_butt_hinge(

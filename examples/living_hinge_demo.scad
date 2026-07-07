@@ -1,3 +1,4 @@
+// @github: morganp/OpenSCAD_hinge
 include <../hinge_library.scad>
 
 // shown embedded in a token slab of parent material either side, so the

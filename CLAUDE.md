@@ -36,6 +36,10 @@ self-contained vanilla OpenSCAD so it renders identically in real OpenSCAD and i
 - Origin/orientation: hinge sits along the X axis, hinge axis (barrel) parallel to Y, closed
   flat in the XY plane at Z=0, so two leaves can be booleaned onto two mating parts directly.
 - Units: mm.
+- Every example file starts with `// @github: morganp/OpenSCAD_hinge` directly above its
+  `include` line. OpenSCAD-gui scans that tag to auto-fetch the library when the file is
+  opened outside a full-repo deep link (and re-emits it in generated code), so copied
+  snippets stay self-resolving. Real OpenSCAD ignores it as a comment.
 
 ## Workflow
 
