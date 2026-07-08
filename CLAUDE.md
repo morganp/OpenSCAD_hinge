@@ -45,7 +45,26 @@ self-contained vanilla OpenSCAD so it renders identically in real OpenSCAD and i
 
 ## Workflow
 
-- Add new hinge type: new module in `hinge_library.scad` + matching `examples/<name>_demo.scad`
-  + rendered PNG in `renders/` + row in the table above.
-- Test load path: this repo must also open standalone in real OpenSCAD (`openscad
-  examples/<name>_demo.scad`) as a regression check against the OpenSCAD-gui engine.
+Add new hinge type — full checklist:
+
+1. New module in `hinge_library.scad` (numbered comment banner matching the existing ones).
+2. Matching `examples/<name>_demo.scad`, starting with the `// @github:` tag line, then
+   `include <../hinge_library.scad>` and one instantiation with explicit named defaults.
+3. Rendered PNG: `openscad -o renders/<name>.png --imgsize=800,600 --autocenter --viewall
+   examples/<name>_demo.scad`.
+4. Schematic: hand-authored dimension-callout SVG in `schematics/<name>_schematic.svg`
+   (same style as existing ones: white background, Menlo 13px, yellow `#f4d35e` parts,
+   red `#c0392b` dimension arrows, blue `#1a5276` labels), rasterized with
+   `rsvg-convert -o schematics/<name>_schematic.png schematics/<name>_schematic.svg`.
+5. Row in the hinge types table above.
+6. README section, matching the existing section template exactly:
+   - `## <module_name> — <short tagline>` heading + one descriptive paragraph
+   - render image, then schematic image
+   - SCAD Studio deep link line:
+     `**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/<name>_demo.scad)** — view this demo in the browser, no install.`
+   - `| Parameter | Default | Meaning |` table covering every module parameter
+
+Test load path: this repo must also open standalone in real OpenSCAD (`openscad
+examples/<name>_demo.scad`) as a regression check against the OpenSCAD-gui engine; exporting
+the demo to STL (`openscad -o /tmp/<name>.stl examples/<name>_demo.scad`) additionally
+verifies the geometry is manifold.
