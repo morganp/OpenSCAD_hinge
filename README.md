@@ -153,6 +153,70 @@ any assembly step.
 
 ---
 
+## removable_hinge — lift-off hinge, door removes without tools
+
+Loose-joint hinge in two fully separable leaves, the pattern used for printer-enclosure and
+cabinet doors that must come off without tools. Leaf 1 carries the lower barrel half with an
+integral pin pointing up the axis; leaf 2 carries the upper barrel half with a blind bore open
+at its lower end, so the door drops on and lifts straight off. Countersunk screw holes down
+each leaf centerline.
+
+![removable_hinge render](renders/removable_hinge.png)
+![removable_hinge schematic](schematics/removable_hinge_schematic.png)
+
+**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/removable_hinge_demo.scad)** — view this demo in the browser, no install.
+
+| Parameter | Default | Meaning |
+|---|---|---|
+| `leaf_length` | 40 | Hinge length along the axis (Y); each leaf's barrel half takes ~half |
+| `leaf_width` | 16 | Depth of each leaf plate |
+| `leaf_thickness` | 3 | Leaf plate thickness |
+| `knuckle_od` | 9 | Barrel outer diameter |
+| `pin_d` | 0 | Pin diameter; 0 = auto (`knuckle_od / 2`) |
+| `pin_clearance` | 0.3 | Radial clearance between pin and socket bore |
+| `knuckle_gap` | 0.4 | Axial gap between the two barrel halves, and leaf-to-barrel gap |
+| `pin_engagement` | 0 | Pin depth inside the socket; 0 = auto (blind bore, full depth) |
+| `screw_hole_d` | 3.5 | Screw through-hole diameter |
+| `screw_csk_d` | 6.5 | Countersink diameter |
+| `screw_csk_depth` | 1.5 | Countersink funnel depth |
+| `screws_per_leaf` | 2 | Screw holes per leaf |
+| `fn` | 48 | Circle resolution |
+
+---
+
+## crate_hinge — rugged-box / sci-fi crate external lug hinge
+
+External hinge in the rugged-box style: the barrel is raised above the mounting straps on
+trapezoidal lug ribs, so the lid swings past 180° and the hardware reads as chunky external
+detail. Leaf 1 owns the outer knuckles, leaf 2 the middle one(s); both sides are bored for a
+loose pin (metal rod, screw, or the printed pin emitted beside the hinge). Cap-head
+counterbored screw holes sit on the outer strip of each strap, clear of the lug ribs.
+
+![crate_hinge render](renders/crate_hinge.png)
+![crate_hinge schematic](schematics/crate_hinge_schematic.png)
+
+**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/crate_hinge_demo.scad)** — view this demo in the browser, no install.
+
+| Parameter | Default | Meaning |
+|---|---|---|
+| `leaf_length` | 36 | Hinge length along the axis (Y) |
+| `strap_width` | 16 | Mounting strap depth (X), per leaf |
+| `strap_thickness` | 3.5 | Strap thickness |
+| `knuckle_od` | 9 | Knuckle/lug barrel outer diameter |
+| `knuckle_count` | 3 | Number of knuckles (odd = pin captive lugs at both ends on leaf 1) |
+| `axis_height` | 0 | Hinge axis height above Z=0; 0 = auto (`knuckle_od`) |
+| `pin_d` | 4 | Pin diameter, e.g. 4mm rod; 0 = auto (`knuckle_od / 2`) |
+| `pin_clearance` | 0.25 | Radial clearance between pin and bore |
+| `knuckle_gap` | 0.4 | Axial clearance between adjacent lugs |
+| `screw_hole_d` | 3.2 | Screw through-hole diameter |
+| `screw_cb_d` | 6.2 | Cap-head counterbore diameter |
+| `screw_cb_depth` | 1.5 | Counterbore depth |
+| `screws_per_leaf` | 2 | Screw holes per strap, on the outer strip |
+| `print_pin` | true | Emit a loose printed pin beside the hinge |
+| `fn` | 48 | Circle resolution |
+
+---
+
 ## Regenerating previews
 
 ```sh

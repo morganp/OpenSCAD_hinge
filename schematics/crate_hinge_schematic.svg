@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 420" font-family="Menlo, monospace" font-size="13">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="620" height="420" fill="#ffffff"/>
+  <text x="20" y="24" font-size="16" font-weight="bold" fill="#1a1a1a">crate_hinge — top view</text>
+
+  <!-- straps -->
+  <rect x="60" y="60" width="120" height="150" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <rect x="220" y="60" width="120" height="150" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+
+  <!-- lug footprints: leaf 1 owns outer knuckles, leaf 2 the middle -->
+  <g fill="#e8b923" stroke="#2c3e50" stroke-width="2">
+    <rect x="130" y="64"  width="86" height="42" rx="4"/>
+    <rect x="184" y="114" width="86" height="42"/>
+    <rect x="130" y="164" width="86" height="42" rx="4"/>
+  </g>
+
+  <!-- pin through all three -->
+  <line x1="200" y1="52" x2="200" y2="230" stroke="#7f8c8d" stroke-width="6" stroke-linecap="round"/>
+  <line x1="200" y1="224" x2="420" y2="226" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="424" y="232" fill="#1a1a1a">pin (pin_d, print_pin)</text>
+
+  <!-- knuckle_count bracket -->
+  <path d="M355,64 L365,64 L365,206 L355,206" fill="none" stroke="#1a5276" stroke-width="1.5"/>
+  <text x="370" y="138" fill="#1a5276">knuckle_count = 3</text>
+
+  <!-- knuckle_gap callout -->
+  <line x1="216" y1="110" x2="280" y2="40" stroke="#c0392b" stroke-width="1"/>
+  <text x="284" y="36" fill="#c0392b">knuckle_gap</text>
+
+  <!-- screw holes on outer strips -->
+  <g fill="#ffffff" stroke="#2c3e50" stroke-width="2">
+    <circle cx="85"  cy="110" r="9"/>
+    <circle cx="85"  cy="160" r="9"/>
+    <circle cx="315" cy="110" r="9"/>
+    <circle cx="315" cy="160" r="9"/>
+  </g>
+  <line x1="315" y1="160" x2="380" y2="252" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="330" y="266" fill="#1a1a1a">cap-head counterbores, clear of lugs</text>
+
+  <!-- leaf_length dimension -->
+  <line x1="35" y1="60" x2="35" y2="210" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="8" y="140" fill="#1a5276" transform="rotate(-90 8 140)">leaf_length</text>
+
+  <!-- strap_width dimension -->
+  <line x1="60" y1="240" x2="180" y2="240" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="72" y="258" fill="#1a5276">strap_width</text>
+
+  <!-- side view: raised axis on trapezoidal lug -->
+  <text x="20" y="300" font-size="16" font-weight="bold" fill="#1a1a1a">side view (raised axis)</text>
+  <!-- straps -->
+  <rect x="60" y="380" width="140" height="14" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <rect x="240" y="380" width="140" height="14" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <!-- lug rib: trapezoid from strap up to barrel -->
+  <path d="M132,380 L200,344 L240,380 Z" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
+  <!-- barrel -->
+  <circle cx="220" cy="344" r="18" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
+  <circle cx="220" cy="344" r="7" fill="#ffffff" stroke="#c0392b" stroke-width="1.5"/>
+  <!-- axis_height dimension -->
+  <line x1="440" y1="344" x2="440" y2="394" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="238" y1="344" x2="440" y2="344" stroke="#1a1a1a" stroke-width="0.75" stroke-dasharray="2,3"/>
+  <line x1="380" y1="394" x2="440" y2="394" stroke="#1a1a1a" stroke-width="0.75" stroke-dasharray="2,3"/>
+  <text x="448" y="374" fill="#1a5276">axis_height</text>
+  <!-- knuckle_od -->
+  <line x1="220" y1="316" x2="260" y2="300" stroke="#c0392b" stroke-width="1"/>
+  <text x="264" y="298" fill="#c0392b">knuckle_od</text>
+
+  <text x="20" y="414" fill="#555555">raised axis lets the lid swing past 180°, rugged-box style</text>
+</svg>

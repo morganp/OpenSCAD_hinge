@@ -28,6 +28,8 @@ self-contained vanilla OpenSCAD so it renders identically in real OpenSCAD and i
 | `living_hinge()` | flexible groove-cut strip hinge, thin-wall print-in-place lids |
 | `door_butt_hinge()` | traditional mortise-plate butt hinge w/ countersunk screw holes, for wooden doors/cabinets |
 | `snap_lid_hinge()` | pin-less snap-fit hinge for box lids, no assembly |
+| `removable_hinge()` | lift-off hinge, pin leaf + socket leaf, door removes without tools |
+| `crate_hinge()` | rugged-box / sci-fi crate external lug hinge, raised axis for 180°+ opening |
 
 ## Conventions
 
