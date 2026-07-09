@@ -13,14 +13,11 @@
   <!-- hinge block -->
   <rect x="180" y="120" width="120" height="40" fill="#fef6e4" stroke="#2c3e50" stroke-width="2" stroke-dasharray="4,3"/>
 
-  <!-- grooves (3) cut from top and bottom leaving a thin web -->
+  <!-- grooves (3), alternating top/bottom cuts, each leaving a web on the opposite face -->
   <g fill="#ffffff" stroke="#2c3e50" stroke-width="1.5">
-    <rect x="205" y="120" width="6" height="14"/>
-    <rect x="205" y="146" width="6" height="14"/>
-    <rect x="237" y="120" width="6" height="14"/>
-    <rect x="237" y="146" width="6" height="14"/>
-    <rect x="269" y="120" width="6" height="14"/>
-    <rect x="269" y="146" width="6" height="14"/>
+    <rect x="205" y="120" width="6" height="32"/>
+    <rect x="237" y="128" width="6" height="32"/>
+    <rect x="269" y="120" width="6" height="32"/>
   </g>
 
   <!-- length dim -->
@@ -29,17 +26,17 @@
 
   <!-- width dim (into page, shown as depth arrow) -->
   <line x1="450" y1="120" x2="450" y2="160" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text x="456" y="144" fill="#1a5276">width (along hinge axis)</text>
+  <text x="400" y="184" fill="#1a5276">width (along hinge axis)</text>
 
   <!-- thickness -->
   <line x1="40" y1="120" x2="40" y2="160" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
   <text x="6" y="145" fill="#1a5276">thickness</text>
 
-  <!-- web_thickness callout -->
-  <line x1="211" y1="134" x2="211" y2="146" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <line x1="211" y1="140" x2="220" y2="70" stroke="#c0392b" stroke-width="1"/>
-  <text x="220" y="60" fill="#1a5276">web_thickness (flex web left</text>
-  <text x="220" y="76" fill="#1a5276">between grooves, top + bottom)</text>
+  <!-- web_thickness callout: web left under the first (top-cut) groove -->
+  <line x1="211" y1="152" x2="211" y2="160" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="211" y1="156" x2="220" y2="70" stroke="#c0392b" stroke-width="1"/>
+  <text x="220" y="60" fill="#1a5276">web_thickness (flex web left on the</text>
+  <text x="220" y="76" fill="#1a5276">face opposite each cut, alternating)</text>
 
   <!-- groove_width -->
   <line x1="205" y1="230" x2="211" y2="230" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>

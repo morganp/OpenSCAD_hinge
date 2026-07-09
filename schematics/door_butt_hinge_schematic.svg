@@ -4,20 +4,22 @@
       <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
     </marker>
   </defs>
-  <rect x="0" y="0" width="620" height="440" fill="#ffffff"/>
+  <rect x="0" y="0" width="720" height="440" fill="#ffffff"/>
   <text x="20" y="24" font-size="16" font-weight="bold" fill="#1a1a1a">door_butt_hinge — top view</text>
 
   <rect x="70" y="60" width="130" height="220" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
   <rect x="260" y="60" width="130" height="220" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
 
+  <!-- pin along the axis, under the knuckles, ends visible top and bottom -->
+  <line x1="230" y1="54" x2="230" y2="286" stroke="#7f8c8d" stroke-width="6" stroke-linecap="round"/>
+  <!-- knuckle segments alternate along the axis: leaf 1 owns 1st/3rd/5th, leaf 2 the 2nd/4th -->
   <g fill="#e8b923" stroke="#2c3e50" stroke-width="2">
-    <circle cx="230" cy="80"  r="15"/>
-    <circle cx="230" cy="126" r="15"/>
-    <circle cx="230" cy="172" r="15"/>
-    <circle cx="230" cy="218" r="15"/>
-    <circle cx="230" cy="264" r="15"/>
+    <rect x="196" y="62"  width="49" height="40" rx="4"/>
+    <rect x="215" y="106" width="49" height="40" rx="4"/>
+    <rect x="196" y="150" width="49" height="40" rx="4"/>
+    <rect x="215" y="194" width="49" height="40" rx="4"/>
+    <rect x="196" y="238" width="49" height="40" rx="4"/>
   </g>
-  <line x1="230" y1="60" x2="230" y2="300" stroke="#7f8c8d" stroke-width="6" stroke-linecap="round"/>
 
   <!-- screw holes, screws_per_leaf = 4, with countersink shown as double circle -->
   <g stroke="#2c3e50" stroke-width="1.5">

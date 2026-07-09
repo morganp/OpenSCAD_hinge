@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 420" font-family="Menlo, monospace" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 470" font-family="Menlo, monospace" font-size="13">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
     </marker>
   </defs>
-  <rect x="0" y="0" width="620" height="420" fill="#ffffff"/>
+  <rect x="0" y="0" width="620" height="470" fill="#ffffff"/>
   <text x="20" y="24" font-size="16" font-weight="bold" fill="#1a1a1a">removable_hinge — top view (lift-off)</text>
 
   <!-- leaves -->
@@ -61,13 +61,26 @@
   <line x1="184" y1="276" x2="216" y2="276" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
   <text x="98" y="280" fill="#1a5276">knuckle_od</text>
 
-  <!-- side view -->
-  <text x="20" y="340" font-size="16" font-weight="bold" fill="#1a1a1a">side view</text>
-  <rect x="60" y="360" width="240" height="14" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
-  <circle cx="180" cy="367" r="16" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
-  <circle cx="180" cy="367" r="5" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1.5"/>
-  <line x1="330" y1="353" x2="330" y2="381" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text x="336" y="371" fill="#1a5276">leaf_thickness</text>
+  <!-- side view: barrel halves offset along the axis, pin bridges the gap -->
+  <text x="20" y="340" font-size="16" font-weight="bold" fill="#1a1a1a">side view (along the leaf plane, axis horizontal)</text>
 
-  <text x="20" y="408" fill="#555555">leaf 1 = pin side, leaf 2 = socket side; no tools to remove</text>
+  <text x="60" y="366" fill="#1a1a1a">leaf 1 half + integral pin</text>
+  <line x1="118" y1="372" x2="118" y2="398" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="300" y="366" fill="#1a1a1a">leaf 2 half, blind bore (dashed)</text>
+  <line x1="320" y1="372" x2="250" y2="404" stroke="#1a1a1a" stroke-width="1"/>
+
+  <!-- leaves edge-on, closed flat (drawn slightly past the barrel so the thickness reads) -->
+  <rect x="44" y="418" width="272" height="14" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <!-- leaf 1 barrel half (left) and leaf 2 barrel half (right), offset along the axis -->
+  <rect x="60" y="400" width="116" height="32" rx="4" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
+  <rect x="184" y="400" width="116" height="32" rx="4" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
+  <!-- blind bore inside leaf 2's half, open toward the gap -->
+  <rect x="182" y="406" width="110" height="20" fill="none" stroke="#1a5276" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- pin, integral to leaf 1, crossing the knuckle_gap into the socket -->
+  <rect x="96" y="409" width="192" height="14" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1.5"/>
+
+  <line x1="330" y1="418" x2="330" y2="432" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="336" y="429" fill="#1a5276">leaf_thickness</text>
+
+  <text x="20" y="458" fill="#555555">leaf 1 = pin side, leaf 2 = socket side; no tools to remove</text>
 </svg>

@@ -1,45 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" font-family="Menlo, monospace" font-size="13">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 400" font-family="Menlo, monospace" font-size="13">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
     </marker>
   </defs>
-  <rect x="0" y="0" width="620" height="320" fill="#ffffff"/>
+  <rect x="0" y="0" width="620" height="400" fill="#ffffff"/>
   <text x="20" y="24" font-size="16" font-weight="bold" fill="#1a1a1a">piano_hinge — top view (derived from knuckle_hinge)</text>
 
-  <rect x="60" y="70" width="200" height="60" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
-  <rect x="300" y="70" width="200" height="60" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <!-- leaves either side of the axis, hinge runs long along the axis -->
+  <rect x="60" y="60" width="440" height="56" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <rect x="60" y="144" width="440" height="56" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
 
+  <!-- pin along the axis, under the knuckles -->
+  <line x1="54" y1="130" x2="506" y2="130" stroke="#7f8c8d" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- knuckle segments alternate along the axis between the two leaves -->
   <g fill="#e8b923" stroke="#2c3e50" stroke-width="2">
-    <circle cx="270" cy="80"  r="10"/>
-    <circle cx="270" cy="100" r="10"/>
-    <circle cx="270" cy="120" r="10"/>
-    <circle cx="290" cy="80"  r="10"/>
-    <circle cx="290" cy="100" r="10"/>
-    <circle cx="290" cy="120" r="10"/>
+    <rect x="62"  y="112" width="36" height="29" rx="4"/>
+    <rect x="102" y="119" width="36" height="29" rx="4"/>
+    <rect x="142" y="112" width="36" height="29" rx="4"/>
+    <rect x="182" y="119" width="36" height="29" rx="4"/>
+    <rect x="222" y="112" width="36" height="29" rx="4"/>
+    <rect x="262" y="119" width="36" height="29" rx="4"/>
+    <rect x="302" y="112" width="36" height="29" rx="4"/>
+    <rect x="342" y="119" width="36" height="29" rx="4"/>
+    <rect x="382" y="112" width="36" height="29" rx="4"/>
+    <rect x="422" y="119" width="36" height="29" rx="4"/>
+    <rect x="462" y="112" width="36" height="29" rx="4"/>
   </g>
-  <line x1="280" y1="65" x2="280" y2="135" stroke="#7f8c8d" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- knuckle_pitch: spacing between adjacent knuckle centers -->
+  <line x1="80" y1="46" x2="120" y2="46" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="80" y1="50" x2="80" y2="110" stroke="#1a1a1a" stroke-width="0.75" stroke-dasharray="2,3"/>
+  <line x1="120" y1="50" x2="120" y2="116" stroke="#1a1a1a" stroke-width="0.75" stroke-dasharray="2,3"/>
+  <text x="126" y="50" fill="#1a5276">knuckle_pitch (target spacing)</text>
 
   <!-- length -->
-  <line x1="60" y1="155" x2="500" y2="155" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text x="200" y="173" fill="#1a5276">length (whole hinge, along the axis)</text>
-
-  <!-- pitch -->
-  <line x1="270" y1="55" x2="290" y2="55" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text x="296" y="59" fill="#1a5276">knuckle_pitch (target spacing)</text>
-  <text x="60" y="196" fill="#555555">knuckle_count = max(3, round(length / knuckle_pitch))</text>
-  <text x="60" y="212" fill="#555555">— derived, not a direct input</text>
+  <line x1="60" y1="224" x2="500" y2="224" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="150" y="242" fill="#1a5276">length (whole hinge, along the axis)</text>
 
   <!-- leaf_width -->
-  <line x1="35" y1="130" x2="35" y2="70" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text x="8" y="105" fill="#1a5276" transform="rotate(-90 8 105)">leaf_width</text>
+  <line x1="35" y1="60" x2="35" y2="116" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="8" y="88" fill="#1a5276" transform="rotate(-90 8 88)">leaf_width</text>
 
-  <!-- leaf_thickness side view -->
-  <text x="20" y="240" font-size="16" font-weight="bold" fill="#1a1a1a">side view</text>
-  <rect x="60" y="255" width="380" height="10" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
-  <line x1="460" y1="248" x2="460" y2="272" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text x="466" y="264" fill="#1a5276">leaf_thickness</text>
+  <text x="60" y="266" fill="#555555">knuckle_count = max(3, round(length / knuckle_pitch))</text>
+  <text x="60" y="282" fill="#555555">— derived, not a direct input (forced odd, pin captive both ends)</text>
 
-  <text x="60" y="298" fill="#555555">knuckle_od, pin_clearance, print_pin, fn</text>
-  <text x="60" y="314" fill="#555555">— same meaning as knuckle_hinge</text>
+  <!-- side view -->
+  <text x="20" y="312" font-size="16" font-weight="bold" fill="#1a1a1a">side view</text>
+  <rect x="60" y="332" width="380" height="10" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <circle cx="250" cy="331" r="11" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="460" y1="332" x2="460" y2="342" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="466" y="340" fill="#1a5276">leaf_thickness</text>
+
+  <text x="60" y="376" fill="#555555">knuckle_od, pin_clearance, print_pin, fn</text>
+  <text x="60" y="392" fill="#555555">— same meaning as knuckle_hinge</text>
 </svg>

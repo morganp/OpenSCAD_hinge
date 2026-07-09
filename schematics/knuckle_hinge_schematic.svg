@@ -11,27 +11,19 @@
   <rect x="60" y="60" width="110" height="140" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
   <rect x="230" y="60" width="110" height="140" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
 
-  <!-- knuckles -->
-  <g fill="#e8b923" stroke="#2c3e50" stroke-width="2">
-    <circle cx="200" cy="76"  r="16"/>
-    <circle cx="200" cy="104" r="16"/>
-    <circle cx="200" cy="132" r="16"/>
-    <circle cx="200" cy="160" r="16"/>
-    <circle cx="200" cy="188" r="16"/>
-  </g>
-  <!-- bore + pin clearance callout on top knuckle -->
-  <circle cx="200" cy="76" r="9" fill="none" stroke="#1a5276" stroke-width="1.5" stroke-dasharray="3,2"/>
-  <circle cx="200" cy="76" r="6.5" fill="#ffffff" stroke="#c0392b" stroke-width="1.5"/>
-
-  <!-- pin, sticking out past the leaves -->
-  <line x1="200" y1="60" x2="200" y2="230" stroke="#7f8c8d" stroke-width="6" stroke-linecap="round"/>
+  <!-- pin along the axis, under the knuckles, sticking out past the leaves -->
+  <line x1="200" y1="54" x2="200" y2="230" stroke="#7f8c8d" stroke-width="6" stroke-linecap="round"/>
   <line x1="200" y1="220" x2="420" y2="222" stroke="#1a1a1a" stroke-width="1"/>
   <text x="424" y="228" fill="#1a1a1a">pin (print_pin)</text>
 
-  <!-- pin_clearance callout leader -->
-  <line x1="209" y1="76" x2="260" y2="34" stroke="#c0392b" stroke-width="1"/>
-  <text x="262" y="26" fill="#c0392b">pin_clearance</text>
-  <text x="262" y="42" fill="#c0392b">(bore Ø − pin Ø, radial)</text>
+  <!-- knuckle segments alternate along the axis: leaf 1 owns 1st/3rd/5th, leaf 2 the 2nd/4th -->
+  <g fill="#e8b923" stroke="#2c3e50" stroke-width="2">
+    <rect x="166" y="62"  width="50" height="24" rx="4"/>
+    <rect x="184" y="90"  width="50" height="24" rx="4"/>
+    <rect x="166" y="118" width="50" height="24" rx="4"/>
+    <rect x="184" y="146" width="50" height="24" rx="4"/>
+    <rect x="166" y="174" width="50" height="24" rx="4"/>
+  </g>
 
   <!-- leaf_width dimension -->
   <line x1="60" y1="250" x2="170" y2="250" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
@@ -43,9 +35,10 @@
   <line x1="35" y1="60" x2="35" y2="200" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
   <text x="8" y="135" fill="#1a5276" transform="rotate(-90 8 135)">leaf_length</text>
 
-  <!-- knuckle_od dimension -->
-  <line x1="184" y1="132" x2="216" y2="132" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <text x="184" y="118" fill="#1a5276">knuckle_od</text>
+  <!-- knuckle_od dimension (barrel width across the top knuckle) -->
+  <line x1="184" y1="74" x2="216" y2="74" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="216" y1="74" x2="254" y2="44" stroke="#c0392b" stroke-width="1"/>
+  <text x="258" y="40" fill="#1a5276">knuckle_od</text>
 
   <!-- knuckle_count bracket -->
   <path d="M355,60 L365,60 L365,200 L355,200" fill="none" stroke="#1a5276" stroke-width="1.5"/>
@@ -54,8 +47,14 @@
   <!-- side view -->
   <text x="20" y="320" font-size="16" font-weight="bold" fill="#1a1a1a">side view</text>
   <rect x="60" y="340" width="240" height="16" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
-  <circle cx="200" cy="348" r="16" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
-  <line x1="330" y1="332" x2="330" y2="364" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <!-- barrel end-on: knuckle_od, bored knuckle (dashed) and pin, all resting on Z=0 -->
+  <circle cx="200" cy="340" r="16" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
+  <circle cx="200" cy="340" r="9" fill="none" stroke="#1a5276" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="200" cy="340" r="6.5" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1.5"/>
+  <line x1="209" y1="334" x2="250" y2="310" stroke="#c0392b" stroke-width="1"/>
+  <text x="254" y="298" fill="#c0392b">pin_clearance</text>
+  <text x="254" y="314" fill="#c0392b">(bore Ø − pin Ø, radial)</text>
+  <line x1="330" y1="340" x2="330" y2="356" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
   <text x="336" y="352" fill="#1a5276">leaf_thickness</text>
 
   <text x="20" y="400" fill="#555555">fn → circle resolution (knuckles + pin)</text>

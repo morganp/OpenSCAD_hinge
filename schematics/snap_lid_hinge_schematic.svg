@@ -9,10 +9,10 @@
 
   <!-- box leaf -->
   <rect x="60" y="120" width="90" height="40" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
-  <!-- flex web -->
-  <rect x="150" y="136" width="40" height="8" fill="#fef6e4" stroke="#2c3e50" stroke-width="2"/>
-  <!-- detent bump -->
-  <circle cx="170" cy="132" r="6" fill="#e8b923" stroke="#2c3e50" stroke-width="1.5"/>
+  <!-- flex web, flush with the top face (the fold line) -->
+  <rect x="150" y="120" width="40" height="8" fill="#fef6e4" stroke="#2c3e50" stroke-width="2"/>
+  <!-- detent bump on the underside of the web -->
+  <circle cx="170" cy="131" r="6" fill="#e8b923" stroke="#2c3e50" stroke-width="1.5"/>
   <!-- lid leaf -->
   <rect x="190" y="120" width="90" height="40" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
 
@@ -36,15 +36,17 @@
   <text x="4" y="145" fill="#1a5276">leaf_thickness</text>
 
   <!-- web_thickness -->
-  <line x1="330" y1="136" x2="330" y2="144" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
-  <line x1="190" y1="140" x2="330" y2="140" stroke="#c0392b" stroke-width="1" stroke-dasharray="2,2"/>
-  <text x="336" y="142" fill="#1a5276">web_thickness</text>
+  <line x1="330" y1="120" x2="330" y2="128" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="190" y1="124" x2="330" y2="124" stroke="#c0392b" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="336" y="126" fill="#1a5276">web_thickness</text>
 
   <!-- bump_r -->
-  <line x1="170" y1="132" x2="176" y2="132" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="176" y1="132" x2="336" y2="90" stroke="#c0392b" stroke-width="1"/>
+  <line x1="170" y1="131" x2="176" y2="131" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="176" y1="131" x2="336" y2="90" stroke="#c0392b" stroke-width="1"/>
   <text x="340" y="86" fill="#1a5276">bump_r (over-center detent radius,</text>
   <text x="340" y="102" fill="#1a5276">gives the snap-open/closed feel)</text>
+
+  <text x="20" y="238" fill="#555555">web sits flush with the top face — that face is the fold line</text>
 
   <!-- width -->
   <text x="20" y="255" fill="#1a5276">width — extrusion depth along the hinge axis (into the page here)</text>
