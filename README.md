@@ -47,6 +47,7 @@ bored-both-sides hinge with an optional separately printed pin.
 | `knuckle_gap` | 0.3 | Axial clearance between adjacent knuckles, and leaf-to-barrel gap |
 | `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly) |
 | `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
+| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"`: emit one leaf only, for fusing each leaf onto a different mating part |
 | `fn` | 48 | `$fn`-style circle resolution for knuckles and pin |
 
 ---
@@ -73,6 +74,7 @@ target `knuckle_pitch`, for long lids needing even load distribution.
 | `knuckle_gap` | 0.3 | Axial knuckle clearance and leaf-to-barrel gap |
 | `integral_pin` | true | Print-in-place pin fused to leaf 1 |
 | `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
+| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"`: emit one leaf only, for fusing each leaf onto a different mating part |
 | `fn` | 32 | Circle resolution |
 
 ---
@@ -211,8 +213,9 @@ counterbored screw holes sit on the outer strip of each strap, clear of the lug 
 | `screw_hole_d` | 3.2 | Screw through-hole diameter |
 | `screw_cb_d` | 6.2 | Cap-head counterbore diameter |
 | `screw_cb_depth` | 1.5 | Counterbore depth |
-| `screws_per_leaf` | 2 | Screw holes per strap, on the outer strip |
+| `screws_per_leaf` | 2 | Screw holes per strap, on the outer strip; 0 = none (e.g. when fusing straps onto printed parts) |
 | `print_pin` | true | Emit a loose printed pin beside the hinge |
+| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"`: emit one leaf only, for fusing each leaf onto a different mating part |
 | `fn` | 48 | Circle resolution |
 
 ---

@@ -27,6 +27,8 @@ module knuckle_hinge(
     knuckle_gap    = 0.3,  // axial clearance between adjacent knuckles, and leaf-to-barrel gap
     integral_pin   = true, // pin fused to leaf 1's knuckles (print-in-place)
     print_pin      = false,// integral_pin=false only: emit loose pin beside the hinge
+    parts          = "both", // "both" | "leaf1" | "leaf2": emit one leaf only, so a caller
+                             // can fuse each leaf onto a different part (lid vs box)
     fn             = 48
 ) {
     knuckle_r = knuckle_od / 2;
@@ -71,17 +73,20 @@ module knuckle_hinge(
     }
 
     // leaf 1 (X<0)
-    if (integral_pin) {
-        leaf(-1);
-        translate([0, -leaf_length/2, axis_z])
-            rotate([-90, 0, 0])
-                cylinder(h=leaf_length, r=pin_r, $fn=fn);
-    } else {
-        difference() { leaf(-1); bore(); }
+    if (parts != "leaf2") {
+        if (integral_pin) {
+            leaf(-1);
+            translate([0, -leaf_length/2, axis_z])
+                rotate([-90, 0, 0])
+                    cylinder(h=leaf_length, r=pin_r, $fn=fn);
+        } else {
+            difference() { leaf(-1); bore(); }
+        }
     }
 
     // leaf 2 (X>=0), always bored
-    difference() { leaf(1); bore(); }
+    if (parts != "leaf1")
+        difference() { leaf(1); bore(); }
 
     if (!integral_pin && print_pin)
         translate([-(edge + leaf_width + knuckle_od), 0, pin_r])
@@ -105,6 +110,7 @@ module piano_hinge(
     knuckle_gap    = 0.3,
     integral_pin   = true,
     print_pin      = false,
+    parts          = "both",
     fn             = 32
 ) {
     // force an odd count so the pin is captive at both ends
@@ -121,6 +127,7 @@ module piano_hinge(
         knuckle_gap    = knuckle_gap,
         integral_pin   = integral_pin,
         print_pin      = print_pin,
+        parts          = parts,
         fn             = fn
     );
 }
@@ -356,6 +363,8 @@ module crate_hinge(
     screw_cb_depth  = 1.5,
     screws_per_leaf = 2,
     print_pin       = true, // emit a loose printed pin beside the hinge
+    parts           = "both", // "both" | "leaf1" | "leaf2": emit one leaf only, so a caller
+                              // can fuse each leaf onto a different part (lid vs box)
     fn              = 48
 ) {
     knuckle_r = knuckle_od / 2;
@@ -401,15 +410,16 @@ module crate_hinge(
     module screw_holes(sign) {
         pitch  = leaf_length / (screws_per_leaf + 1);
         hole_x = edge + lug_base + (strap_width - lug_base) / 2;
-        for (i = [1:screws_per_leaf])
-            translate([sign * hole_x, -leaf_length/2 + i*pitch, 0]) {
-                cylinder(h=strap_thickness*3, r=screw_hole_d/2, center=true, $fn=fn);
-                translate([0, 0, strap_thickness - screw_cb_depth])
-                    cylinder(h=screw_cb_depth + 0.05, r=screw_cb_d/2, $fn=fn);
-            }
+        if (screws_per_leaf > 0)
+            for (i = [1:screws_per_leaf])
+                translate([sign * hole_x, -leaf_length/2 + i*pitch, 0]) {
+                    cylinder(h=strap_thickness*3, r=screw_hole_d/2, center=true, $fn=fn);
+                    translate([0, 0, strap_thickness - screw_cb_depth])
+                        cylinder(h=screw_cb_depth + 0.05, r=screw_cb_d/2, $fn=fn);
+                }
     }
 
-    for (s = [-1, 1])
+    for (s = (parts == "leaf1" ? [-1] : parts == "leaf2" ? [1] : [-1, 1]))
         difference() {
             leaf(s);
             bore();
