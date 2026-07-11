@@ -220,6 +220,37 @@ counterbored screw holes sit on the outer strip of each strap, clear of the lug 
 
 ---
 
+## flush_knuckle_hinge — full-thickness leaf knuckle hinge
+
+Like `knuckle_hinge`, but each leaf plate is as thick as the knuckle barrel and runs right up
+to the hinge axis. A cylindrical scallop is cut along each leaf's inner edge between its own
+knuckles, so the opposing leaf's knuckles nest into the plate with close radial tolerance.
+There is no thin plate-to-barrel neck (stronger than `knuckle_hinge`), the barrel sits flush
+inside the leaf edges, and the scallop radius is exactly what the geometry needs for a full
+0–180° swing: the hinge closes flat and folds flat.
+
+![flush_knuckle_hinge render](renders/flush_knuckle_hinge.png)
+![flush_knuckle_hinge schematic](schematics/flush_knuckle_hinge_schematic.png)
+
+**[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/flush_knuckle_hinge_demo.scad)** — view this demo in the browser, no install.
+
+| Parameter | Default | Meaning |
+|---|---|---|
+| `leaf_length` | 40 | Hinge length along the axis (Y) |
+| `leaf_width` | 15 | Depth of each leaf plate (X), axis to outer edge |
+| `knuckle_od` | 6 | Knuckle/barrel outer diameter, also the leaf plate thickness |
+| `knuckle_count` | 5 | Number of knuckles across both leaves (odd = pin captive at both ends) |
+| `pin_d` | 0 | Pin diameter; 0 = auto (`knuckle_od / 2`) |
+| `pin_clearance` | 0.25 | Radial clearance between pin and knuckle bore |
+| `knuckle_gap` | 0.3 | Axial clearance between adjacent knuckles |
+| `scallop_clearance` | 0.3 | Radial clearance between a knuckle and the opposing leaf's scallop |
+| `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly) |
+| `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
+| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"`: emit one leaf only, for fusing each leaf onto a different mating part |
+| `fn` | 48 | `$fn`-style circle resolution for knuckles, scallop, and pin |
+
+---
+
 ## Regenerating previews
 
 ```sh

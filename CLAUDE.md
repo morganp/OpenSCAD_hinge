@@ -30,6 +30,7 @@ self-contained vanilla OpenSCAD so it renders identically in real OpenSCAD and i
 | `snap_lid_hinge()` | pin-less snap-fit hinge for box lids, no assembly |
 | `removable_hinge()` | lift-off hinge, pin leaf + socket leaf, door removes without tools |
 | `crate_hinge()` | rugged-box / sci-fi crate external lug hinge, raised axis for 180°+ opening |
+| `flush_knuckle_hinge()` | knuckle hinge with full-thickness leaves, scalloped edges wrap opposing knuckles at close tolerance |
 
 ## Conventions
 

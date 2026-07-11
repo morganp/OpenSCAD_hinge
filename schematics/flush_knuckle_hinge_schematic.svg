@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 420" font-family="Menlo, monospace" font-size="13">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="620" height="420" fill="#ffffff"/>
+  <text x="20" y="24" font-size="16" font-weight="bold" fill="#1a1a1a">flush_knuckle_hinge — top view</text>
+
+  <!-- leaves run right up to the axis; edge scalloped back in the opposing segments -->
+  <!-- leaf 1 (left): owns segments 1/3/5, edge recedes in segments 2/4 -->
+  <path d="M60,60 L200,60 L200,88 L190,88 L190,116 L200,116 L200,144 L190,144 L190,172 L200,172 L200,200 L60,200 Z"
+        fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <!-- leaf 2 (right): owns segments 2/4, edge recedes in segments 1/3/5 -->
+  <path d="M340,60 L210,60 L210,88 L200,88 L200,116 L210,116 L210,144 L200,144 L200,172 L210,172 L210,200 L340,200 Z"
+        fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+
+  <!-- knuckle segments on the axis, alternating ownership -->
+  <g fill="#e8b923" stroke="#2c3e50" stroke-width="2">
+    <rect x="184" y="62"  width="32" height="24" rx="4"/>
+    <rect x="184" y="90"  width="32" height="24" rx="4"/>
+    <rect x="184" y="118" width="32" height="24" rx="4"/>
+    <rect x="184" y="146" width="32" height="24" rx="4"/>
+    <rect x="184" y="174" width="32" height="24" rx="4"/>
+  </g>
+
+  <!-- leaf_width dimension (axis to outer edge) -->
+  <line x1="60" y1="250" x2="200" y2="250" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="60" y1="242" x2="60" y2="258" stroke="#c0392b" stroke-width="1"/>
+  <line x1="200" y1="242" x2="200" y2="258" stroke="#c0392b" stroke-width="1"/>
+  <text x="90" y="270" fill="#1a5276">leaf_width</text>
+
+  <!-- leaf_length dimension -->
+  <line x1="35" y1="60" x2="35" y2="200" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="8" y="135" fill="#1a5276" transform="rotate(-90 8 135)">leaf_length</text>
+
+  <!-- knuckle_od dimension -->
+  <line x1="184" y1="52" x2="216" y2="52" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <line x1="216" y1="52" x2="254" y2="40" stroke="#c0392b" stroke-width="1"/>
+  <text x="258" y="36" fill="#1a5276">knuckle_od</text>
+
+  <!-- scallop callout: recessed edge clears the opposing knuckle -->
+  <line x1="207" y1="102" x2="290" y2="102" stroke="#c0392b" stroke-width="1"/>
+  <text x="294" y="98" fill="#c0392b">scallop: leaf edge cut back</text>
+  <text x="294" y="114" fill="#c0392b">clears opposing knuckle by</text>
+  <text x="294" y="130" fill="#c0392b">scallop_clearance (radial)</text>
+
+  <!-- knuckle_count bracket -->
+  <path d="M355,146 L365,146 L365,200 L355,200" fill="none" stroke="#1a5276" stroke-width="1.5"/>
+  <text x="370" y="178" fill="#1a5276">knuckle_count = 5</text>
+
+  <!-- side view -->
+  <text x="20" y="308" font-size="16" font-weight="bold" fill="#1a1a1a">side view</text>
+  <!-- full-thickness leaf: plate as thick as the barrel, knuckle flush with both faces -->
+  <rect x="60" y="330" width="240" height="32" fill="#f4d35e" stroke="#2c3e50" stroke-width="2"/>
+  <circle cx="200" cy="346" r="16" fill="#e8b923" stroke="#2c3e50" stroke-width="2"/>
+  <!-- scallop bore in the opposing leaf edge (dashed, knuckle_r + scallop_clearance) -->
+  <circle cx="200" cy="346" r="19" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- pin bore (dashed) and pin -->
+  <circle cx="200" cy="346" r="9" fill="none" stroke="#1a5276" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="200" cy="346" r="6.5" fill="#7f8c8d" stroke="#2c3e50" stroke-width="1.5"/>
+  <line x1="213" y1="332" x2="256" y2="310" stroke="#c0392b" stroke-width="1"/>
+  <text x="260" y="306" fill="#c0392b">scallop_clearance (radial,</text>
+  <text x="260" y="322" fill="#c0392b">knuckle to leaf scallop)</text>
+  <line x1="206" y1="352" x2="256" y2="384" stroke="#c0392b" stroke-width="1"/>
+  <text x="260" y="390" fill="#c0392b">pin_clearance (bore Ø − pin Ø, radial)</text>
+  <line x1="330" y1="330" x2="330" y2="362" stroke="#c0392b" stroke-width="1.5" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="336" y="342" fill="#1a5276">leaf thickness</text>
+  <text x="336" y="358" fill="#1a5276">= knuckle_od</text>
+
+  <text x="20" y="412" fill="#555555">fn → circle resolution (knuckles + pin)</text>
+</svg>

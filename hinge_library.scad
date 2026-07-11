@@ -431,3 +431,98 @@ module crate_hinge(
             rotate([-90, 0, 0])
                 cylinder(h=leaf_length - knuckle_gap, r=pin_r, center=true, $fn=fn);
 }
+
+// ---------------------------------------------------------------------------
+// 8. flush_knuckle_hinge, knuckle hinge with full-thickness leaves: each leaf
+//    plate is as thick as the knuckle barrel and runs right up to the hinge
+//    axis, with a cylindrical scallop cut along its inner edge so the other
+//    leaf's knuckles nest into the plate with close radial tolerance. No thin
+//    plate-to-barrel neck (stronger than knuckle_hinge) and the barrel sits
+//    flush inside the leaf edges. The scallop radius is exactly what the
+//    geometry needs for a full 0-180 degree swing: closes flat, folds flat.
+// ---------------------------------------------------------------------------
+module flush_knuckle_hinge(
+    leaf_length       = 40,   // length along Y (hinge axis)
+    leaf_width        = 15,   // depth along X, per leaf, axis to outer edge
+    knuckle_od        = 6,    // barrel OD; also the leaf plate thickness
+    knuckle_count     = 5,    // total knuckles across both leaves (odd = pin captive at both ends)
+    pin_d             = 0,    // pin diameter; 0 = auto (knuckle_od / 2)
+    pin_clearance     = 0.25, // radial clearance between pin and knuckle bore
+    knuckle_gap       = 0.3,  // axial clearance between adjacent knuckles
+    scallop_clearance = 0.3,  // radial clearance between a knuckle and the opposing leaf's scallop
+    integral_pin      = true, // pin fused to leaf 1's knuckles (print-in-place)
+    print_pin         = false,// integral_pin=false only: emit loose pin beside the hinge
+    parts             = "both", // "both" | "leaf1" | "leaf2": emit one leaf only, so a caller
+                                // can fuse each leaf onto a different part (lid vs box)
+    fn                = 48
+) {
+    knuckle_r = knuckle_od / 2;
+    axis_z    = knuckle_r;               // barrel rests on the Z=0 plane
+    seg       = leaf_length / knuckle_count;
+    pin_r     = (pin_d > 0 ? pin_d : knuckle_od / 2) / 2;
+    bore_r    = pin_r + pin_clearance;
+    scallop_r = knuckle_r + scallop_clearance;
+
+    // full-thickness plate, inner face on the axis plane x=0
+    module plate(sign) {
+        translate([sign > 0 ? 0 : -leaf_width, -leaf_length/2, 0])
+            cube([leaf_width, leaf_length, knuckle_od]);
+    }
+
+    // scallop channel along the whole inner edge, clears the opposing knuckles
+    module channel() {
+        translate([0, -leaf_length/2 - 1, axis_z])
+            rotate([-90, 0, 0])
+                cylinder(h=leaf_length + 2, r=scallop_r, $fn=fn);
+    }
+
+    module barrel_seg(i) {
+        translate([0, -leaf_length/2 + i*seg + knuckle_gap/2, axis_z])
+            rotate([-90, 0, 0])
+                cylinder(h=seg - knuckle_gap, r=knuckle_r, $fn=fn);
+    }
+
+    // refills the scallop across this leaf's own knuckles, fusing them to the plate
+    module fill(sign, i) {
+        translate([sign > 0 ? 0 : -(scallop_r + 0.5),
+                   -leaf_length/2 + i*seg + knuckle_gap/2, 0])
+            cube([scallop_r + 0.5, seg - knuckle_gap, knuckle_od]);
+    }
+
+    // sign=-1 owns even-index knuckles (both ends when count is odd)
+    module leaf(sign) {
+        difference() { plate(sign); channel(); }
+        for (i = [0:knuckle_count-1])
+            if ((i % 2 == 0) == (sign < 0)) {
+                barrel_seg(i);
+                fill(sign, i);
+            }
+    }
+
+    module bore() {
+        translate([0, -leaf_length/2 - 1, axis_z])
+            rotate([-90, 0, 0])
+                cylinder(h=leaf_length + 2, r=bore_r, $fn=fn);
+    }
+
+    // leaf 1 (X<0)
+    if (parts != "leaf2") {
+        if (integral_pin) {
+            leaf(-1);
+            translate([0, -leaf_length/2, axis_z])
+                rotate([-90, 0, 0])
+                    cylinder(h=leaf_length, r=pin_r, $fn=fn);
+        } else {
+            difference() { leaf(-1); bore(); }
+        }
+    }
+
+    // leaf 2 (X>=0), always bored
+    if (parts != "leaf1")
+        difference() { leaf(1); bore(); }
+
+    if (!integral_pin && print_pin)
+        translate([-(leaf_width + knuckle_od), 0, pin_r])
+            rotate([-90, 0, 0])
+                cylinder(h=leaf_length - knuckle_gap, r=pin_r, center=true, $fn=fn);
+}
