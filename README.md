@@ -236,9 +236,20 @@ inside the leaf edges, and the scallop radius is exactly what the geometry needs
 
 A micro variant (`examples/flush_knuckle_hinge_micro_demo.scad`, render
 `renders/flush_knuckle_hinge_micro.png`) shows the same hinge at 2mm knuckle/leaf thickness
-with a 0.8mm pin and tightened clearances — the bore wall is 0.45mm, so it wants a fine
-(0.25–0.4mm) nozzle.
+with a 0.8mm pin and tightened clearances.
 **[▶ Open micro variant in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/flush_knuckle_hinge_micro_demo.scad)**
+
+Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
+
+- Wall width is not the limit: a 0.4mm nozzle with variable line width (Arachne) prints
+  lines down to ~0.24mm, so the micro variant's 0.45mm bore wall and 0.8mm pin are printable.
+- Clearance vs layer height is the limit: `pin_clearance=0.15` is below one 0.16mm layer, so
+  the vertical gap around the pin rounds to a single layer and may fuse. If the pin seizes,
+  bump `pin_clearance` to 0.2 and `scallop_clearance` to 0.25.
+- Infill barely matters: hinge loads run through knuckles and pin, which are
+  perimeter-dominated; 3 walls carry it.
+- First-layer squish narrows the scallop gap at bed level — if leaves fuse along the bottom
+  of the seam, raise `scallop_clearance` or reduce first-layer flow.
 
 | Parameter | Default | Meaning |
 |---|---|---|
