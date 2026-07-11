@@ -234,6 +234,12 @@ inside the leaf edges, and the scallop radius is exactly what the geometry needs
 
 **[▶ Open in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/flush_knuckle_hinge_demo.scad)** — view this demo in the browser, no install.
 
+A micro variant (`examples/flush_knuckle_hinge_micro_demo.scad`, render
+`renders/flush_knuckle_hinge_micro.png`) shows the same hinge at 2mm knuckle/leaf thickness
+with a 0.8mm pin and tightened clearances — the bore wall is 0.45mm, so it wants a fine
+(0.25–0.4mm) nozzle.
+**[▶ Open micro variant in SCAD Studio](https://lizard-spock.co.uk/openscad-gui/?github=morganp/OpenSCAD_hinge/examples/flush_knuckle_hinge_micro_demo.scad)**
+
 | Parameter | Default | Meaning |
 |---|---|---|
 | `leaf_length` | 40 | Hinge length along the axis (Y) |
