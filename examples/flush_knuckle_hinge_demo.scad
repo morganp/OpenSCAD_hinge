@@ -9,5 +9,6 @@ flush_knuckle_hinge(
     pin_clearance     = 0.25,
     knuckle_gap       = 0.3,
     scallop_clearance = 0.3,
-    integral_pin      = true
+    integral_pin      = true,
+    parts             = "both" // "leaf1" | "leaf2" to emit one leaf for fusing onto a part
 );
