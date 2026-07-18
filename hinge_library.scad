@@ -9,6 +9,18 @@
 // clearances leave the joint free to rotate.
 
 // ---------------------------------------------------------------------------
+// Shared: gluable pin end cap. Disc flange sized to the knuckle face plus a
+// pin-diameter stub that glues into the end knuckle bore, capping and
+// retaining a cut-to-length metal rod (or printed) pin. The pinned hinge
+// modules emit a pair of these via parts="caps"; they print flange-down.
+// ---------------------------------------------------------------------------
+module hinge_pin_cap(knuckle_od, pin_d, cap_thickness, plug_depth, fn) {
+    cylinder(h=cap_thickness, d=knuckle_od, $fn=fn);
+    translate([0, 0, cap_thickness])
+        cylinder(h=plug_depth, d=pin_d, $fn=fn);
+}
+
+// ---------------------------------------------------------------------------
 // 1. knuckle_hinge, print-in-place barrel hinge for box lids.
 //    Interleaved knuckles on two leaves. By default the pin is integral to
 //    leaf 1 (its knuckles are solid with the pin) and leaf 2's knuckles are
@@ -25,10 +37,14 @@ module knuckle_hinge(
     pin_d          = 0,    // pin diameter; 0 = auto (knuckle_od / 2)
     pin_clearance  = 0.25, // radial clearance between pin and knuckle bore
     knuckle_gap    = 0.3,  // axial clearance between adjacent knuckles, and leaf-to-barrel gap
-    integral_pin   = true, // pin fused to leaf 1's knuckles (print-in-place)
+    integral_pin   = true, // pin fused to leaf 1's knuckles (print-in-place, parts="both" only)
     print_pin      = false,// integral_pin=false only: emit loose pin beside the hinge
-    parts          = "both", // "both" | "leaf1" | "leaf2": emit one leaf only, so a caller
-                             // can fuse each leaf onto a different part (lid vs box)
+    cap_thickness  = 1.5,  // parts="caps": end cap flange thickness
+    cap_plug_depth = 0,    // parts="caps": stub depth into the bore; 0 = auto (half an end knuckle)
+    parts          = "both", // "both" | "leaf1" | "leaf2" | "pin" | "caps": emit one component
+                             // only, so a caller can fuse each leaf onto a different part (lid vs
+                             // box) and print the loose pin, or a pair of gluable pin end caps
+                             // (for metal rod pins), as its own piece
     fn             = 48
 ) {
     knuckle_r = knuckle_od / 2;
@@ -72,26 +88,38 @@ module knuckle_hinge(
                 cylinder(h=leaf_length + 2, r=bore_r, $fn=fn);
     }
 
-    // leaf 1 (X<0)
-    if (parts != "leaf2") {
-        if (integral_pin) {
-            leaf(-1);
-            translate([0, -leaf_length/2, axis_z])
-                rotate([-90, 0, 0])
-                    cylinder(h=leaf_length, r=pin_r, $fn=fn);
-        } else {
-            difference() { leaf(-1); bore(); }
-        }
+    // leaf 1 (X<0); a lone leaf is always bored, an integral pin can only
+    // articulate when both leaves print in place around it
+    if (parts == "both" && integral_pin) {
+        leaf(-1);
+        translate([0, -leaf_length/2, axis_z])
+            rotate([-90, 0, 0])
+                cylinder(h=leaf_length, r=pin_r, $fn=fn);
+    } else if (parts == "both" || parts == "leaf1") {
+        difference() { leaf(-1); bore(); }
     }
 
     // leaf 2 (X>=0), always bored
-    if (parts != "leaf1")
+    if (parts == "both" || parts == "leaf2")
         difference() { leaf(1); bore(); }
 
-    if (!integral_pin && print_pin)
+    // loose pin: its own print (parts="pin", on the bed at the origin) or
+    // emitted beside a bored-both-sides pair
+    if (parts == "pin")
+        translate([0, 0, pin_r])
+            rotate([-90, 0, 0])
+                cylinder(h=leaf_length - knuckle_gap, r=pin_r, center=true, $fn=fn);
+    else if (parts == "both" && !integral_pin && print_pin)
         translate([-(edge + leaf_width + knuckle_od), 0, pin_r])
             rotate([-90, 0, 0])
                 cylinder(h=leaf_length - knuckle_gap, r=pin_r, center=true, $fn=fn);
+
+    // pair of gluable end caps for a rod pin, flange-down on the bed
+    if (parts == "caps")
+        for (s = [-1, 1])
+            translate([s * knuckle_od, 0, 0])
+                hinge_pin_cap(knuckle_od, pin_r * 2, cap_thickness,
+                              cap_plug_depth > 0 ? cap_plug_depth : seg / 2, fn);
 }
 
 // ---------------------------------------------------------------------------
@@ -110,6 +138,8 @@ module piano_hinge(
     knuckle_gap    = 0.3,
     integral_pin   = true,
     print_pin      = false,
+    cap_thickness  = 1.5,
+    cap_plug_depth = 0,
     parts          = "both",
     fn             = 32
 ) {
@@ -127,6 +157,8 @@ module piano_hinge(
         knuckle_gap    = knuckle_gap,
         integral_pin   = integral_pin,
         print_pin      = print_pin,
+        cap_thickness  = cap_thickness,
+        cap_plug_depth = cap_plug_depth,
         parts          = parts,
         fn             = fn
     );
@@ -362,9 +394,13 @@ module crate_hinge(
     screw_cb_d      = 6.2,  // cap-head counterbore diameter
     screw_cb_depth  = 1.5,
     screws_per_leaf = 2,
-    print_pin       = true, // emit a loose printed pin beside the hinge
-    parts           = "both", // "both" | "leaf1" | "leaf2": emit one leaf only, so a caller
-                              // can fuse each leaf onto a different part (lid vs box)
+    print_pin       = true, // parts="both" only: emit a loose printed pin beside the hinge
+    cap_thickness   = 1.5,  // parts="caps": end cap flange thickness
+    cap_plug_depth  = 0,    // parts="caps": stub depth into the bore; 0 = auto (half an end knuckle)
+    parts           = "both", // "both" | "leaf1" | "leaf2" | "pin" | "caps": emit one component
+                              // only, so a caller can fuse each leaf onto a different part (lid vs
+                              // box) and print the loose pin, or a pair of gluable pin end caps
+                              // (for metal rod pins), as its own piece
     fn              = 48
 ) {
     knuckle_r = knuckle_od / 2;
@@ -419,17 +455,30 @@ module crate_hinge(
                 }
     }
 
-    for (s = (parts == "leaf1" ? [-1] : parts == "leaf2" ? [1] : [-1, 1]))
+    for (s = (parts == "leaf1" ? [-1] : parts == "leaf2" ? [1] : parts == "both" ? [-1, 1] : []))
         difference() {
             leaf(s);
             bore();
             screw_holes(s);
         }
 
-    if (print_pin)
+    // loose pin: its own print (parts="pin", on the bed at the origin) or
+    // emitted beside the full hinge
+    if (parts == "pin")
+        translate([0, 0, pin_r])
+            rotate([-90, 0, 0])
+                cylinder(h=leaf_length - knuckle_gap, r=pin_r, center=true, $fn=fn);
+    else if (parts == "both" && print_pin)
         translate([-(edge + strap_width + knuckle_od), 0, pin_r])
             rotate([-90, 0, 0])
                 cylinder(h=leaf_length - knuckle_gap, r=pin_r, center=true, $fn=fn);
+
+    // pair of gluable end caps for a rod pin, flange-down on the bed
+    if (parts == "caps")
+        for (s = [-1, 1])
+            translate([s * knuckle_od, 0, 0])
+                hinge_pin_cap(knuckle_od, pin_r * 2, cap_thickness,
+                              cap_plug_depth > 0 ? cap_plug_depth : seg / 2, fn);
 }
 
 // ---------------------------------------------------------------------------
@@ -450,10 +499,18 @@ module flush_knuckle_hinge(
     pin_clearance     = 0.25, // radial clearance between pin and knuckle bore
     knuckle_gap       = 0.3,  // axial clearance between adjacent knuckles
     scallop_clearance = 0.3,  // radial clearance between a knuckle and the opposing leaf's scallop
-    integral_pin      = true, // pin fused to leaf 1's knuckles (print-in-place)
+    back_relief       = 0,    // flat trimmed off the top face of each knuckle on the side that
+                              // protrudes into the opposing scallop; relieves the bind that
+                              // stops the printed swing before 90 degrees. Keep below
+                              // knuckle_od/2 - (pin_d/2 + pin_clearance) or the bore breaks out
+    integral_pin      = true, // pin fused to leaf 1's knuckles (print-in-place, parts="both" only)
     print_pin         = false,// integral_pin=false only: emit loose pin beside the hinge
-    parts             = "both", // "both" | "leaf1" | "leaf2": emit one leaf only, so a caller
-                                // can fuse each leaf onto a different part (lid vs box)
+    cap_thickness     = 1.5,  // parts="caps": end cap flange thickness
+    cap_plug_depth    = 0,    // parts="caps": stub depth into the bore; 0 = auto (half an end knuckle)
+    parts             = "both", // "both" | "leaf1" | "leaf2" | "pin" | "caps": emit one component
+                                // only, so a caller can fuse each leaf onto a different part (lid
+                                // vs box) and print the loose pin, or a pair of gluable pin end
+                                // caps (for metal rod pins), as its own piece
     fn                = 48
 ) {
     knuckle_r = knuckle_od / 2;
@@ -489,14 +546,26 @@ module flush_knuckle_hinge(
             cube([scallop_r + 0.5, seg - knuckle_gap, knuckle_od]);
     }
 
+    // top-face flat across the knuckle half that protrudes past the plate
+    // face; only barrel material lives there, so plates are untouched
+    module relief(sign) {
+        translate([sign > 0 ? -knuckle_r : 0, -leaf_length/2 - 1, knuckle_od - back_relief])
+            cube([knuckle_r, leaf_length + 2, back_relief + 1]);
+    }
+
     // sign=-1 owns even-index knuckles (both ends when count is odd)
     module leaf(sign) {
-        difference() { plate(sign); channel(); }
-        for (i = [0:knuckle_count-1])
-            if ((i % 2 == 0) == (sign < 0)) {
-                barrel_seg(i);
-                fill(sign, i);
+        difference() {
+            union() {
+                difference() { plate(sign); channel(); }
+                for (i = [0:knuckle_count-1])
+                    if ((i % 2 == 0) == (sign < 0)) {
+                        barrel_seg(i);
+                        fill(sign, i);
+                    }
             }
+            if (back_relief > 0) relief(sign);
+        }
     }
 
     module bore() {
@@ -505,24 +574,36 @@ module flush_knuckle_hinge(
                 cylinder(h=leaf_length + 2, r=bore_r, $fn=fn);
     }
 
-    // leaf 1 (X<0)
-    if (parts != "leaf2") {
-        if (integral_pin) {
-            leaf(-1);
-            translate([0, -leaf_length/2, axis_z])
-                rotate([-90, 0, 0])
-                    cylinder(h=leaf_length, r=pin_r, $fn=fn);
-        } else {
-            difference() { leaf(-1); bore(); }
-        }
+    // leaf 1 (X<0); a lone leaf is always bored, an integral pin can only
+    // articulate when both leaves print in place around it
+    if (parts == "both" && integral_pin) {
+        leaf(-1);
+        translate([0, -leaf_length/2, axis_z])
+            rotate([-90, 0, 0])
+                cylinder(h=leaf_length, r=pin_r, $fn=fn);
+    } else if (parts == "both" || parts == "leaf1") {
+        difference() { leaf(-1); bore(); }
     }
 
     // leaf 2 (X>=0), always bored
-    if (parts != "leaf1")
+    if (parts == "both" || parts == "leaf2")
         difference() { leaf(1); bore(); }
 
-    if (!integral_pin && print_pin)
+    // loose pin: its own print (parts="pin", on the bed at the origin) or
+    // emitted beside a bored-both-sides pair
+    if (parts == "pin")
+        translate([0, 0, pin_r])
+            rotate([-90, 0, 0])
+                cylinder(h=leaf_length - knuckle_gap, r=pin_r, center=true, $fn=fn);
+    else if (parts == "both" && !integral_pin && print_pin)
         translate([-(leaf_width + knuckle_od), 0, pin_r])
             rotate([-90, 0, 0])
                 cylinder(h=leaf_length - knuckle_gap, r=pin_r, center=true, $fn=fn);
+
+    // pair of gluable end caps for a rod pin, flange-down on the bed
+    if (parts == "caps")
+        for (s = [-1, 1])
+            translate([s * knuckle_od, 0, 0])
+                hinge_pin_cap(knuckle_od, pin_r * 2, cap_thickness,
+                              cap_plug_depth > 0 ? cap_plug_depth : seg / 2, fn);
 }

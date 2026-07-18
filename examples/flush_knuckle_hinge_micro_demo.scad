@@ -8,10 +8,14 @@ flush_knuckle_hinge(
     leaf_width        = 8,
     knuckle_od        = 2,
     knuckle_count     = 5,
-    pin_d             = 0.8,
+    pin_d             = 0.8,  // suits a 0.8mm metal rod or filament pin; 0 = auto (knuckle_od / 2)
     pin_clearance     = 0.15,
     knuckle_gap       = 0.25,
     scallop_clearance = 0.2,
+    back_relief       = 0.45,  // top-face knuckle trim, frees swing past 90 degrees
     integral_pin      = true,
-    parts             = "both" // "leaf1" | "leaf2" to emit one leaf for fusing onto a part
+    parts             = "both" // "both" print-in-place; "leaf1" | "leaf2" lone bored leaf
+                                // for fusing onto a part, then "pin" for the loose pin and
+                                // "caps" for a pair of gluable rod-pin end caps
+
 );

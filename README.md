@@ -45,9 +45,11 @@ bored-both-sides hinge with an optional separately printed pin.
 | `pin_d` | 0 | Pin diameter; 0 = auto (`knuckle_od / 2`) |
 | `pin_clearance` | 0.25 | Radial clearance between pin and knuckle bore |
 | `knuckle_gap` | 0.3 | Axial clearance between adjacent knuckles, and leaf-to-barrel gap |
-| `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly) |
+| `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly); `parts="both"` only, lone leaves are always bored |
 | `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
-| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"`: emit one leaf only, for fusing each leaf onto a different mating part |
+| `cap_thickness` | 1.5 | `parts="caps"`: end cap flange thickness |
+| `cap_plug_depth` | 0 | `parts="caps"`: cap stub depth into the bore; 0 = auto (half an end knuckle) |
+| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"` / `"pin"` / `"caps"`: emit one component only; a lone leaf is always bored for a loose pin, printed separately via `"pin"`, and `"caps"` emits a pair of gluable end caps that retain a cut-to-length metal rod pin |
 | `fn` | 48 | `$fn`-style circle resolution for knuckles and pin |
 
 ---
@@ -72,9 +74,11 @@ target `knuckle_pitch`, for long lids needing even load distribution.
 | `pin_d` | 0 | Pin diameter; 0 = auto |
 | `pin_clearance` | 0.25 | Radial clearance between pin and bore |
 | `knuckle_gap` | 0.3 | Axial knuckle clearance and leaf-to-barrel gap |
-| `integral_pin` | true | Print-in-place pin fused to leaf 1 |
+| `integral_pin` | true | Print-in-place pin fused to leaf 1; `parts="both"` only, lone leaves are always bored |
 | `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
-| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"`: emit one leaf only, for fusing each leaf onto a different mating part |
+| `cap_thickness` | 1.5 | `parts="caps"`: end cap flange thickness |
+| `cap_plug_depth` | 0 | `parts="caps"`: cap stub depth into the bore; 0 = auto (half an end knuckle) |
+| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"` / `"pin"` / `"caps"`: emit one component only; a lone leaf is always bored for a loose pin, printed separately via `"pin"`, and `"caps"` emits a pair of gluable end caps that retain a cut-to-length metal rod pin |
 | `fn` | 32 | Circle resolution |
 
 ---
@@ -214,8 +218,10 @@ counterbored screw holes sit on the outer strip of each strap, clear of the lug 
 | `screw_cb_d` | 6.2 | Cap-head counterbore diameter |
 | `screw_cb_depth` | 1.5 | Counterbore depth |
 | `screws_per_leaf` | 2 | Screw holes per strap, on the outer strip; 0 = none (e.g. when fusing straps onto printed parts) |
-| `print_pin` | true | Emit a loose printed pin beside the hinge |
-| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"`: emit one leaf only, for fusing each leaf onto a different mating part |
+| `print_pin` | true | `parts="both"` only: emit a loose printed pin beside the hinge |
+| `cap_thickness` | 1.5 | `parts="caps"`: end cap flange thickness |
+| `cap_plug_depth` | 0 | `parts="caps"`: cap stub depth into the bore; 0 = auto (half an end knuckle) |
+| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"` / `"pin"` / `"caps"`: emit one component only; a lone leaf is always bored for a loose pin, printed separately via `"pin"`, and `"caps"` emits a pair of gluable end caps that retain a cut-to-length metal rod pin |
 | `fn` | 48 | Circle resolution |
 
 ---
@@ -250,6 +256,10 @@ Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
   perimeter-dominated; 3 walls carry it.
 - First-layer squish narrows the scallop gap at bed level — if leaves fuse along the bottom
   of the seam, raise `scallop_clearance` or reduce first-layer flow.
+- If the printed hinge binds before 90° (test-print confirmed at this scale), the knuckles
+  are dragging on the opposing scallop's lip. Set `back_relief` (micro demo uses 0.45, the
+  bore-breakout limit at this scale) to trim a flat off the top face of each knuckle on the
+  side that protrudes into the opposing leaf; the swing then clears through the full range.
 
 | Parameter | Default | Meaning |
 |---|---|---|
@@ -261,9 +271,12 @@ Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
 | `pin_clearance` | 0.25 | Radial clearance between pin and knuckle bore |
 | `knuckle_gap` | 0.3 | Axial clearance between adjacent knuckles |
 | `scallop_clearance` | 0.3 | Radial clearance between a knuckle and the opposing leaf's scallop |
-| `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly) |
+| `back_relief` | 0 | Flat trimmed off the top face of each knuckle on the side protruding into the opposing scallop; frees the swing when the print binds. Keep below `knuckle_od/2 - (pin_d/2 + pin_clearance)` |
+| `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly); `parts="both"` only, lone leaves are always bored |
 | `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
-| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"`: emit one leaf only, for fusing each leaf onto a different mating part |
+| `cap_thickness` | 1.5 | `parts="caps"`: end cap flange thickness |
+| `cap_plug_depth` | 0 | `parts="caps"`: cap stub depth into the bore; 0 = auto (half an end knuckle) |
+| `parts` | "both" | `"both"` / `"leaf1"` / `"leaf2"` / `"pin"` / `"caps"`: emit one component only; a lone leaf is always bored for a loose pin, printed separately via `"pin"`, and `"caps"` emits a pair of gluable end caps that retain a cut-to-length metal rod pin |
 | `fn` | 48 | `$fn`-style circle resolution for knuckles, scallop, and pin |
 
 ---
