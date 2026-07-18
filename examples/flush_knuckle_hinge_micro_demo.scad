@@ -13,7 +13,7 @@ flush_knuckle_hinge(
     knuckle_gap       = 0.25,
     scallop_clearance = 0.2,
     back_relief       = 0.35,  // top-face notch depth just outside the seam lip, frees swing past 90 degrees
-    back_relief_width = 0.2,   // notch width outward from the lip; rest of the knuckle stays full height
+    back_relief_width = 0,     // 0 = auto: notch spans the knuckle's full overlap over the lip
     integral_pin      = true,
     parts             = "both" // "both" print-in-place; "leaf1" | "leaf2" lone bored leaf
                                 // for fusing onto a part, then "pin" for the loose pin and

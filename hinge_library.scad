@@ -499,12 +499,12 @@ module flush_knuckle_hinge(
     pin_clearance     = 0.25, // radial clearance between pin and knuckle bore
     knuckle_gap       = 0.3,  // axial clearance between adjacent knuckles
     scallop_clearance = 0.3,  // radial clearance between a knuckle and the opposing leaf's scallop
-    back_relief       = 0,    // depth of narrow notches cut into each leaf's top face just
-                              // outside the seam lip on both sides, where the opposing
-                              // knuckles' bottom edge lands; relieves the bind that stops the
-                              // printed swing before 90 degrees
-    back_relief_width = 0,    // width of that notch running outward from the seam lip; the
-                              // rest of the knuckle keeps full height. 0 = auto (knuckle_od / 20)
+    back_relief       = 0,    // depth of a narrow notch cut into each leaf's scallop lip beside
+                              // every opposing-knuckle segment, where that knuckle's bottom
+                              // edge lands; cut into the leaf's own material only, and relieves
+                              // the bind that stops the printed swing before 90 degrees
+    back_relief_width = 0,    // width of that notch running outward from the seam lip;
+                              // 0 = auto, spans the knuckle's full overlap over the lip
     integral_pin      = true, // pin fused to leaf 1's knuckles (print-in-place, parts="both" only)
     print_pin         = false,// integral_pin=false only: emit loose pin beside the hinge
     cap_thickness     = 1.5,  // parts="caps": end cap flange thickness
@@ -548,17 +548,19 @@ module flush_knuckle_hinge(
             cube([scallop_r + 0.5, seg - knuckle_gap, knuckle_od]);
     }
 
-    // narrow top-face notches either side of the seam, starting where the
-    // scallop lip meets the top face (the visible bottom edge of the
-    // opposing knuckles) and running outward, so those knuckles swing past
-    // without dragging; both leaves get both notches, cutting each lip and
-    // each knuckle flank, and the rest of the knuckle keeps its full height
-    module relief() {
-        w  = back_relief_width > 0 ? back_relief_width : knuckle_od / 20;
+    // narrow top-face notch in the scallop lip beside each opposing-knuckle
+    // segment, starting where the lip meets the top face (the visible bottom
+    // edge of that knuckle) and running outward, so the knuckle swings past
+    // without dragging. Cut per leaf into its own lip only, never into the
+    // opposing knuckles, so the notches alternate sides section by section
+    module relief(sign) {
         x0 = sqrt(scallop_r*scallop_r - knuckle_r*knuckle_r);
-        for (s = [-1, 1])
-            translate([s > 0 ? x0 : -(x0 + w), -leaf_length/2 - 1, knuckle_od - back_relief])
-                cube([w, leaf_length + 2, back_relief + 1]);
+        w  = back_relief_width > 0 ? back_relief_width : knuckle_r - x0;
+        for (i = [0:knuckle_count-1])
+            if ((i % 2 == 0) != (sign < 0))
+                translate([sign > 0 ? x0 : -(x0 + w),
+                           -leaf_length/2 + i*seg, knuckle_od - back_relief])
+                    cube([w, seg, back_relief + 1]);
     }
 
     // sign=-1 owns even-index knuckles (both ends when count is odd)
@@ -572,7 +574,7 @@ module flush_knuckle_hinge(
                         fill(sign, i);
                     }
             }
-            if (back_relief > 0) relief();
+            if (back_relief > 0) relief(sign);
         }
     }
 
