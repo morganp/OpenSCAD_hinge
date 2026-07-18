@@ -258,10 +258,9 @@ Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
   of the seam, raise `scallop_clearance` or reduce first-layer flow.
 - If the printed hinge binds before 90° (test-print confirmed at this scale), the bottom
   edge of the opposing knuckles is dragging where it lands just outside the seam lip. Set
-  `back_relief` (micro demo uses 0.35 deep × `back_relief_width` 0.1 wide) to cut a narrow
-  notch into each leaf's top face there — each leaf's notch offset to its own side of the
-  seam; the swing then clears through the full range and the rest of the knuckle keeps its
-  full height.
+  `back_relief` (micro demo uses 0.35 deep × `back_relief_width` 0.2 wide) to cut narrow
+  notches into each leaf's top face just outside the seam lip on both sides; the swing then
+  clears through the full range and the rest of the knuckle keeps its full height.
 
 | Parameter | Default | Meaning |
 |---|---|---|
@@ -273,8 +272,8 @@ Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
 | `pin_clearance` | 0.25 | Radial clearance between pin and knuckle bore |
 | `knuckle_gap` | 0.3 | Axial clearance between adjacent knuckles |
 | `scallop_clearance` | 0.3 | Radial clearance between a knuckle and the opposing leaf's scallop |
-| `back_relief` | 0 | Depth of a narrow notch cut into each leaf's top face just outside the seam lip, where the opposing knuckles' bottom edge lands; frees the swing when the print binds |
-| `back_relief_width` | 0 | Width of that notch running outward from the seam lip; the rest of the knuckle keeps full height. 0 = auto (`knuckle_od / 20`) |
+| `back_relief` | 0 | Depth of narrow notches cut into each leaf's top face just outside the seam lip on both sides, where the opposing knuckles' bottom edge lands; frees the swing when the print binds |
+| `back_relief_width` | 0 | Width of each notch running outward from the seam lip; the rest of the knuckle keeps full height. 0 = auto (`knuckle_od / 20`) |
 | `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly); `parts="both"` only, lone leaves are always bored |
 | `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
 | `cap_thickness` | 1.5 | `parts="caps"`: end cap flange thickness |
