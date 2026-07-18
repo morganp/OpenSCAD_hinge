@@ -256,10 +256,10 @@ Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
   perimeter-dominated; 3 walls carry it.
 - First-layer squish narrows the scallop gap at bed level — if leaves fuse along the bottom
   of the seam, raise `scallop_clearance` or reduce first-layer flow.
-- If the printed hinge binds before 90° (test-print confirmed at this scale), the knuckles
-  are dragging on the opposing scallop's lip. Set `back_relief` (micro demo uses 0.45, the
-  bore-breakout limit at this scale) to trim a flat off the top face of each knuckle on the
-  side that protrudes into the opposing leaf; the swing then clears through the full range.
+- If the printed hinge binds before 90° (test-print confirmed at this scale), the opposing
+  knuckles are dragging over the scallop's top lip. Set `back_relief` (micro demo uses 0.35)
+  to trim a flat off each leaf's top face along its own side of the hinge line — the scallop
+  lip and the inner half of its own knuckles; the swing then clears through the full range.
 
 | Parameter | Default | Meaning |
 |---|---|---|
@@ -271,7 +271,7 @@ Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
 | `pin_clearance` | 0.25 | Radial clearance between pin and knuckle bore |
 | `knuckle_gap` | 0.3 | Axial clearance between adjacent knuckles |
 | `scallop_clearance` | 0.3 | Radial clearance between a knuckle and the opposing leaf's scallop |
-| `back_relief` | 0 | Flat trimmed off the top face of each knuckle on the side protruding into the opposing scallop; frees the swing when the print binds. Keep below `knuckle_od/2 - (pin_d/2 + pin_clearance)` |
+| `back_relief` | 0 | Flat trimmed off each leaf's top face along its own side of the hinge line (scallop lip + inner knuckle half); frees the swing when the print binds. Keep below `knuckle_od/2 - (pin_d/2 + pin_clearance)` |
 | `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly); `parts="both"` only, lone leaves are always bored |
 | `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
 | `cap_thickness` | 1.5 | `parts="caps"`: end cap flange thickness |

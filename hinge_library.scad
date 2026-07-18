@@ -499,9 +499,9 @@ module flush_knuckle_hinge(
     pin_clearance     = 0.25, // radial clearance between pin and knuckle bore
     knuckle_gap       = 0.3,  // axial clearance between adjacent knuckles
     scallop_clearance = 0.3,  // radial clearance between a knuckle and the opposing leaf's scallop
-    back_relief       = 0,    // flat trimmed off the top face of each knuckle on the side that
-                              // protrudes into the opposing scallop; relieves the bind that
-                              // stops the printed swing before 90 degrees. Keep below
+    back_relief       = 0,    // flat trimmed off each leaf's top face along its own side of the
+                              // hinge line (scallop lip + inner knuckle half); relieves the bind
+                              // that stops the printed swing before 90 degrees. Keep below
                               // knuckle_od/2 - (pin_d/2 + pin_clearance) or the bore breaks out
     integral_pin      = true, // pin fused to leaf 1's knuckles (print-in-place, parts="both" only)
     print_pin         = false,// integral_pin=false only: emit loose pin beside the hinge
@@ -546,10 +546,11 @@ module flush_knuckle_hinge(
             cube([scallop_r + 0.5, seg - knuckle_gap, knuckle_od]);
     }
 
-    // top-face flat across the knuckle half that protrudes past the plate
-    // face; only barrel material lives there, so plates are untouched
+    // top-face flat along the leaf's own side of the hinge line: trims the
+    // scallop's top lip and the inner half of its own knuckles, so the
+    // opposing leaf's knuckles swing past without dragging
     module relief(sign) {
-        translate([sign > 0 ? -knuckle_r : 0, -leaf_length/2 - 1, knuckle_od - back_relief])
+        translate([sign > 0 ? 0 : -knuckle_r, -leaf_length/2 - 1, knuckle_od - back_relief])
             cube([knuckle_r, leaf_length + 2, back_relief + 1]);
     }
 
