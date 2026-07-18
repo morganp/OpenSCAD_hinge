@@ -560,11 +560,16 @@ module flush_knuckle_hinge(
         x0 = sqrt(scallop_r*scallop_r - knuckle_r*knuckle_r) - scallop_clearance;
         w  = back_relief_width > 0 ? back_relief_width
                                    : knuckle_r + scallop_clearance - x0;
+        // along the axis the notch runs scallop_clearance past each segment
+        // end (into the neighbouring fill plateau): printed knuckles also run
+        // longer than nominal, and the bare knuckle_gap/2 overhang left end
+        // walls the knuckle ends dragged on
         for (i = [0:knuckle_count-1])
             if ((i % 2 == 0) != (sign < 0))
                 translate([sign > 0 ? x0 : -(x0 + w),
-                           -leaf_length/2 + i*seg, knuckle_od - back_relief])
-                    cube([w, seg, back_relief + 1]);
+                           -leaf_length/2 + i*seg - scallop_clearance,
+                           knuckle_od - back_relief])
+                    cube([w, seg + 2*scallop_clearance, back_relief + 1]);
     }
 
     // sign=-1 owns even-index knuckles (both ends when count is odd)
