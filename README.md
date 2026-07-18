@@ -260,7 +260,8 @@ Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
   edge of each knuckle is dragging on the opposing leaf's seam lip. Set `back_relief`
   (micro demo uses 0.35 deep, auto width) to cut a narrow notch into each leaf's lip beside
   every opposing-knuckle segment — each leaf's own material only, alternating sides section
-  by section, spanning the knuckle's full overlap over the lip; the swing then clears
+  by section, spanning the knuckle's full overlap over the lip with `scallop_clearance`
+  margin at both walls (printed knuckles run wider than nominal); the swing then clears
   through the full range and the knuckles keep their full height.
 
 | Parameter | Default | Meaning |
@@ -274,7 +275,7 @@ Print notes (0.4mm nozzle, 0.16mm layers, 3 walls, 3% infill reference profile):
 | `knuckle_gap` | 0.3 | Axial clearance between adjacent knuckles |
 | `scallop_clearance` | 0.3 | Radial clearance between a knuckle and the opposing leaf's scallop |
 | `back_relief` | 0 | Depth of a narrow notch cut into each leaf's scallop lip beside every opposing-knuckle segment, where that knuckle's bottom edge lands; cut into the leaf's own material only, frees the swing when the print binds |
-| `back_relief_width` | 0 | Width of each notch running outward from the seam lip; 0 = auto, spans the knuckle's full overlap over the lip (`knuckle_od/2 - sqrt(scallop_r² - (knuckle_od/2)²)`) |
+| `back_relief_width` | 0 | Width of each notch; 0 = auto, spans the knuckle's full overlap over the lip plus `scallop_clearance` margin at both walls (printed knuckles run wider than nominal) |
 | `integral_pin` | true | Pin fused to leaf 1's knuckles (print-in-place, no assembly); `parts="both"` only, lone leaves are always bored |
 | `print_pin` | false | With `integral_pin=false`: emit a loose pin beside the hinge |
 | `cap_thickness` | 1.5 | `parts="caps"`: end cap flange thickness |

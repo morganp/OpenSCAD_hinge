@@ -554,8 +554,12 @@ module flush_knuckle_hinge(
     // without dragging. Cut per leaf into its own lip only, never into the
     // opposing knuckles, so the notches alternate sides section by section
     module relief(sign) {
-        x0 = sqrt(scallop_r*scallop_r - knuckle_r*knuckle_r);
-        w  = back_relief_width > 0 ? back_relief_width : knuckle_r - x0;
+        // margin scallop_clearance both sides: printed knuckles bulge past
+        // nominal knuckle_r and the printed lip crest bulges inward, so an
+        // edge-to-edge notch still leaves drag strips at both walls
+        x0 = sqrt(scallop_r*scallop_r - knuckle_r*knuckle_r) - scallop_clearance;
+        w  = back_relief_width > 0 ? back_relief_width
+                                   : knuckle_r + scallop_clearance - x0;
         for (i = [0:knuckle_count-1])
             if ((i % 2 == 0) != (sign < 0))
                 translate([sign > 0 ? x0 : -(x0 + w),
